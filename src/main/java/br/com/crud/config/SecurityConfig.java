@@ -3,6 +3,7 @@ package br.com.crud.config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -16,12 +17,32 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private UserDetailsService userDetailsService;
+    
+    private static final String[] PUBLIC_MATCHERS_SWAGGER = {
+			"/swagger-ui.html/**",
+			"/swagger-resource/**",
+			"/**",
+			"/css/**",
+			"/resources/**",
+			"/webjars/**",
+			"/swagger-resources/**"
+	};
+    private static final String[] PUBLIC_MATCHERS = {
+    		"/h2-console/**"
+    };
+    
+    private static final String[] PUBLIC_MATCHERS_POST = {
+    		"/clientes/**",
+    		"/clientes/forgot"
+    };
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable();
         http.authorizeRequests()
-                .antMatchers("/clientes/**").permitAll()
+                .antMatchers(PUBLIC_MATCHERS_SWAGGER).permitAll()
+                .antMatchers(HttpMethod.POST,PUBLIC_MATCHERS_POST).permitAll()
+                .antMatchers(PUBLIC_MATCHERS).permitAll()
                 .anyRequest().authenticated();
     }
 
