@@ -1,9 +1,14 @@
 package br.com.crud.entity;
 
+/**
+ * 
+ * @author Rafael Castro
+ * Classe com os perfis de usuários
+ *
+ */
 public enum Perfil {
 
-    ADMIN(1,"ROLE_ADMIN"),
-    GARCOM(2,"ROLE_USER");
+    ADMIN(1,"ROLE_ADMIN");
 
     private int cod;
     private String descricao;

@@ -6,6 +6,13 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 import br.com.crud.entity.ClienteEntity;
 
+
+/**
+ * 
+ * @author Rafael Castro
+ * Classe responsavel por trazer os clientes sem que mostre a senha
+ * @version 1.0
+ */
 public class ClienteDto {
 	private Integer matricula;
 	private String nome;
@@ -13,6 +20,7 @@ public class ClienteDto {
 	private Date dataNascimento;
 	private String email;
 
+	
 	public ClienteDto(ClienteEntity c) {
 		super();
 		this.matricula = c.getMatricula();

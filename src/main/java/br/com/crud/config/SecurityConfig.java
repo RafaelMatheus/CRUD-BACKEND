@@ -11,6 +11,12 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+/**
+ * 
+ * @author Rafael Castro
+ * Classe com as configurações de liberações de PATHS, para uso do spring security
+ *@version 1.0
+ */
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig  extends WebSecurityConfigurerAdapter {
@@ -18,6 +24,10 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter {
     @Autowired
     private UserDetailsService userDetailsService;
     
+    /**
+     * Liberação de paths para o swagger
+     * @see br.com.crud.config.SwaggerConfig.informacoesApi()
+     */
     private static final String[] PUBLIC_MATCHERS_SWAGGER = {
 			"/swagger-ui.html/**",
 			"/swagger-resource/**",
@@ -27,6 +37,7 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter {
 			"/webjars/**",
 			"/swagger-resources/**"
 	};
+    
     private static final String[] PUBLIC_MATCHERS = {
     		"/h2-console/**"
     };

@@ -1,5 +1,12 @@
 package br.com.crud.entity.dto;
 
+/**
+ * 
+ * @author Rafael Castro
+ * Classe responsavel por capturar solicitação de novas senhas
+ * @version 1.0
+ *
+ */
 public class NewPasswordDto {
 
 	private Integer matricula;
