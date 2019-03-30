@@ -1,4 +1,4 @@
-package crud.crud.models;
+package br.com.crud.entity;
 
 public enum Perfil {
 
