@@ -4,6 +4,9 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -32,6 +35,11 @@ public class ClienteService {
 		return cliente.orElseThrow(
 				()-> new ObjectNotFoundException("Não foi possivel encontrar o cliente com a matricula: "+ matricula+
 				"por favor, entre em contato com o suporte"));
+	}
+	
+	public Page<ClienteEntity> search(Integer page, Integer linesPerPage, String orderBy, String direction) {
+		PageRequest pageRequest = new PageRequest(page, linesPerPage, Direction.valueOf(direction), orderBy);
+		return clienteRepository.findAll(pageRequest);
 	}
 	
 	public ClienteEntity insert(ClienteEntity cliente) { 
