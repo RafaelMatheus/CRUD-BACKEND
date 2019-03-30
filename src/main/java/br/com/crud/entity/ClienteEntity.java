@@ -31,6 +31,7 @@ public class ClienteEntity {
 	@Email(message = "Informe um email valido")
 	@Column(unique=true)
 	private String email;
+	@Column(unique=true)
 	private String senha;
 	
 
@@ -77,7 +78,6 @@ public class ClienteEntity {
 		this.email = email;
 	}
 	
-	@JsonIgnore
 	public String getSenha() {
 		return senha;
 	}

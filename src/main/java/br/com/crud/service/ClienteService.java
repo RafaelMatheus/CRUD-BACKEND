@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import br.com.crud.entity.ClienteEntity;
@@ -18,6 +19,8 @@ public class ClienteService {
 	@Autowired
 	private ClienteRepository clienteRepository;
 	
+	@Autowired
+	private BCryptPasswordEncoder bcrypt;
 	
 	public List<ClienteEntity> findAll() {
 		return clienteRepository.findAll();
@@ -33,6 +36,7 @@ public class ClienteService {
 	
 	public ClienteEntity insert(ClienteEntity cliente) { 
 		cliente.setMatricula(null);
+		cliente.setSenha(bcrypt.encode(cliente.getSenha()));
 		return clienteRepository.save(cliente);
 	}
 	
