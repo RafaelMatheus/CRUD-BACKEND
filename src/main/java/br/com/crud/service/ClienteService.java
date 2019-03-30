@@ -11,6 +11,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import br.com.crud.entity.ClienteEntity;
+import br.com.crud.entity.dto.ClienteDto;
 import br.com.crud.repository.ClienteRepository;
 import br.com.crud.service.exception.ObjectNotFoundException;
 
@@ -76,6 +77,8 @@ public class ClienteService {
 		return clienteBd;
 	}
 	
-	
+	public ClienteDto fromDto(ClienteEntity clienteEntity) {
+		return new ClienteDto(clienteEntity);
+	}
 	
 }

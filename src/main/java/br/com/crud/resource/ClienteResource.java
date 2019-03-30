@@ -33,7 +33,7 @@ public class ClienteResource {
 	
 	@ApiOperation(
 			value="Retorna um cilente por matricula", 
-			response=ClienteEntity.class,
+			response=ClienteDto.class,
 			notes="Essa operação não é necessário nenhuma premissa.",
 			produces="application/json")
 	@ApiResponses(value= {
@@ -54,14 +54,15 @@ public class ClienteResource {
  
 	})
 	@RequestMapping(value = "/{matricula}", method = RequestMethod.GET)
-	public ResponseEntity<ClienteEntity> findByMatricula(@PathVariable(name = "matricula") Integer matricula){
-		return ResponseEntity.ok(clienteService.findByMatricula(matricula));
+	public ResponseEntity<ClienteDto> findByMatricula(@PathVariable(name = "matricula") Integer matricula){
+		ClienteDto clienteDto = clienteService.fromDto(clienteService.findByMatricula(matricula));
+		return ResponseEntity.ok(clienteDto);
 	}
 	
 	
 	@ApiOperation(
 			value="Retorna uma lista de clientes", 
-			response=ClienteEntity.class,
+			response=ClienteDto.class,
 			notes="Essa operação não é necessário nenhuma premissa.",
 			produces="application/json")
 	@ApiResponses(value= {
@@ -175,7 +176,7 @@ public class ClienteResource {
  
 	})
 	@RequestMapping(value = "/{matricula}", method = RequestMethod.DELETE)
-	public ResponseEntity<Void> delte(@RequestBody ClienteEntity cliente, @PathVariable(name = "matricula") Integer matricula){
+	public ResponseEntity<Void> delete(@RequestBody ClienteEntity cliente, @PathVariable(name = "matricula") Integer matricula){
 		cliente.setMatricula(matricula);
 		clienteService.delete(cliente);
 		return ResponseEntity.noContent().build();
