@@ -17,13 +17,48 @@ import br.com.crud.entity.ClienteEntity;
 import br.com.crud.entity.dto.ClienteDto;
 import br.com.crud.entity.dto.NewPasswordDto;
 import br.com.crud.service.ClienteService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 
+@Api
 @RestController
 @RequestMapping(value = "/clientes")
 public class ClienteResource {
 	@Autowired
 	private ClienteService clienteService;
 	
+	
+
+	@ApiOperation(
+			value="Retorna um clente por id", 
+			response=ClienteEntity.class,
+			consumes="",
+			notes="Essa operação não é necessário nenhuma premissa.")
+	@ApiResponses(value= {
+			@ApiResponse(
+					code=200, 
+					message="Retorna uma cliente com o status code ok"
+					),
+			@ApiResponse(
+					code=403,
+					message="Acesso negado, existem alguns endpoints neste path que é necessário acesso de ADM"
+
+					),
+			@ApiResponse(
+					code=401,
+					message="Indica que você não possui as credencias de autenticação válida. "
+
+					),
+			@ApiResponse(
+					code=404,
+					message="Indica que o recurso que você está procurando não existe, ou não foi encontrado."
+
+					)
+			
+ 
+	})
 	@RequestMapping(value = "/{matricula}", method = RequestMethod.GET)
 	public ResponseEntity<ClienteEntity> findByMatricula(@PathVariable(name = "matricula") Integer matricula){
 		return ResponseEntity.ok(clienteService.findByMatricula(matricula));
