@@ -40,7 +40,7 @@ public class SwaggerConfig implements WebMvcConfigurer{
  
 		docket
 		.select()
-		.apis(RequestHandlerSelectors.basePackage("br.com.vestebem"))
+		.apis(RequestHandlerSelectors.basePackage("br.com.crud"))
 		.paths(PathSelectors.any())
 		.build()
 		.apiInfo(this.informacoesApi().build());

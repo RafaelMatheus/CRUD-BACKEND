@@ -5,6 +5,7 @@ import java.net.URI;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,29 +23,23 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
-@Api
+@Api(value="Greeting")
+@CrossOrigin(origins  = "http://localhost:8080")
 @RestController
 @RequestMapping(value = "/clientes")
 public class ClienteResource {
 	@Autowired
 	private ClienteService clienteService;
 	
-	
-
 	@ApiOperation(
-			value="Retorna um clente por id", 
+			value="Retorna um cilente por matricula", 
 			response=ClienteEntity.class,
-			consumes="",
-			notes="Essa operação não é necessário nenhuma premissa.")
+			notes="Essa operação não é necessário nenhuma premissa.",
+			produces="application/json")
 	@ApiResponses(value= {
 			@ApiResponse(
 					code=200, 
-					message="Retorna uma cliente com o status code ok"
-					),
-			@ApiResponse(
-					code=403,
-					message="Acesso negado, existem alguns endpoints neste path que é necessário acesso de ADM"
-
+					message="Retorna um cliente com o status code ok"
 					),
 			@ApiResponse(
 					code=401,
@@ -56,7 +51,6 @@ public class ClienteResource {
 					message="Indica que o recurso que você está procurando não existe, ou não foi encontrado."
 
 					)
-			
  
 	})
 	@RequestMapping(value = "/{matricula}", method = RequestMethod.GET)
@@ -64,6 +58,29 @@ public class ClienteResource {
 		return ResponseEntity.ok(clienteService.findByMatricula(matricula));
 	}
 	
+	
+	@ApiOperation(
+			value="Retorna uma lista de clientes", 
+			response=ClienteEntity.class,
+			notes="Essa operação não é necessário nenhuma premissa.",
+			produces="application/json")
+	@ApiResponses(value= {
+			@ApiResponse(
+					code=200, 
+					message="Retorna uma lista paginada de clientes, com o status code ok"
+					),
+			@ApiResponse(
+					code=401,
+					message="Indica que você não possui as credencias de autenticação válida. "
+
+					),
+			@ApiResponse(
+					code=404,
+					message="Indica que o recurso que você está procurando não existe, ou não foi encontrado."
+
+					)
+ 
+	})
 	@RequestMapping(method = RequestMethod.GET)
 	public ResponseEntity<Page<ClienteDto>> findPage(
 			@RequestParam(value = "page", defaultValue = "0") Integer page,
@@ -76,6 +93,28 @@ public class ClienteResource {
 		return ResponseEntity.ok().body(listDto);
 	}
 	
+	@ApiOperation(
+			value="Insere um cliente", 
+			response=ClienteEntity.class,
+			notes="Essa operação não é necessário nenhuma premissa.",
+			produces="application/json")
+	@ApiResponses(value= {
+			@ApiResponse(
+					code=201, 
+					message="Retorna pela URL a matricula do cliente inserido, com o status code ok"
+					),
+			@ApiResponse(
+					code=401,
+					message="Indica que você não possui as credencias de autenticação válida. "
+
+					),
+			@ApiResponse(
+					code=404,
+					message="Indica que o recurso que você está procurando não existe, ou não foi encontrado."
+
+					)
+ 
+	})
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<Void> insert(@RequestBody ClienteEntity cliente){
 		ClienteEntity newCliente = clienteService.insert(cliente);
@@ -84,6 +123,28 @@ public class ClienteResource {
 		return ResponseEntity.created(uri).build();
 	}
 	
+	@ApiOperation(
+			value="Atualiza um cliente por sua matricula", 
+			response=ClienteEntity.class,
+			notes="Essa operação não é necessário nenhuma premissa.",
+			produces="application/json")
+	@ApiResponses(value= {
+			@ApiResponse(
+					code=204, 
+					message="Retorna no content"
+					),
+			@ApiResponse(
+					code=401,
+					message="Indica que você não possui as credencias de autenticação válida. "
+
+					),
+			@ApiResponse(
+					code=404,
+					message="Indica que o recurso que você está procurando não existe, ou não foi encontrado."
+
+					)
+ 
+	})
 	@RequestMapping(value = "/{matricula}", method = RequestMethod.PUT)
 	public ResponseEntity<Void> update(@RequestBody ClienteEntity cliente, @PathVariable(name = "matricula") Integer matricula){
 		cliente.setMatricula(matricula);
@@ -91,6 +152,28 @@ public class ClienteResource {
 		return ResponseEntity.noContent().build();
 	}
 	
+	@ApiOperation(
+			value="Deleta um cliente utilizando sua matricula", 
+			response=ClienteEntity.class,
+			notes="Essa operação não é necessário nenhuma premissa.",
+			produces="application/json")
+	@ApiResponses(value= {
+			@ApiResponse(
+					code=204, 
+					message="Retorna no content"
+					),
+			@ApiResponse(
+					code=401,
+					message="Indica que você não possui as credencias de autenticação válida. "
+
+					),
+			@ApiResponse(
+					code=404,
+					message="Indica que o recurso que você está procurando não existe, ou não foi encontrado."
+
+					)
+ 
+	})
 	@RequestMapping(value = "/{matricula}", method = RequestMethod.DELETE)
 	public ResponseEntity<Void> delte(@RequestBody ClienteEntity cliente, @PathVariable(name = "matricula") Integer matricula){
 		cliente.setMatricula(matricula);
@@ -98,10 +181,32 @@ public class ClienteResource {
 		return ResponseEntity.noContent().build();
 	}
 	
+	@ApiOperation(
+			value="Atualiza a senha de um cliente", 
+			response=NewPasswordDto.class,
+			notes="Essa operação não é necessário nenhuma premissa.",
+			produces="application/json")
+	@ApiResponses(value= {
+			@ApiResponse(
+					code=204, 
+					message="Retorna no content"
+					),
+			@ApiResponse(
+					code=401,
+					message="Indica que você não possui as credencias de autenticação válida. "
+
+					),
+			@ApiResponse(
+					code=404,
+					message="Indica que o recurso que você está procurando não existe, ou não foi encontrado."
+
+					)
+ 
+	})
 	@RequestMapping(value = "/forgot", method = RequestMethod.POST)
 	public ResponseEntity<Void> forgotPassword(@RequestBody NewPasswordDto newPassword){
 		clienteService.updatePassword(newPassword.getMatricula(), newPassword.getSenha());
-		return ResponseEntity.ok().build();
+		return ResponseEntity.noContent().build();
 	}
 	
 }
