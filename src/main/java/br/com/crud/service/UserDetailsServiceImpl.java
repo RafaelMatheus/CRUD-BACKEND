@@ -1,7 +1,5 @@
-package crud.crud.services;
+package br.com.crud.service;
 
-import crud.crud.models.Usuario;
-import crud.crud.repositories.UsuarioRepository;
 import crud.crud.security.UserSS;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -9,18 +7,21 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import br.com.crud.entity.ClienteEntity;
+import br.com.crud.repository.ClienteRepository;
+
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Autowired
-    private UsuarioRepository repo;
+    private ClienteRepository repo;
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        Usuario u = repo.findByEmail(email);
-        if(u==null){
+        ClienteEntity cliente = repo.findByEmail(email);
+        if(cliente == null){
             throw new UsernameNotFoundException(email);
         }
-        return new UserSS(u.getMatricula(),u.getEmail(),u.getSenha());
+        return new UserSS(cliente.getMatricula(),cliente.getEmail(),cliente.getSenha());
     }
 }

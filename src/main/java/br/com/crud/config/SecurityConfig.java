@@ -1,4 +1,4 @@
-package crud.crud.config;
+package br.com.crud.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -22,7 +22,7 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable();
         http.authorizeRequests()
-                .antMatchers("/usuarios/**").permitAll()
+                .antMatchers("/clientes/**").permitAll()
                 .anyRequest().authenticated();
     }
 
