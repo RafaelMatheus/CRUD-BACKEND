@@ -27,9 +27,9 @@ public class ClienteService {
 	}
 	
 	public ClienteEntity findByMatricula(Integer matricula) {
-		Optional<ClienteEntity> clientes = clienteRepository.findById(matricula);
+		Optional<ClienteEntity> cliente = clienteRepository.findById(matricula);
 		
-		return clientes.orElseThrow(
+		return cliente.orElseThrow(
 				()-> new ObjectNotFoundException("Não foi possivel encontrar o cliente com a matricula: "+ matricula+
 				"por favor, entre em contato com o suporte"));
 	}
@@ -45,6 +45,11 @@ public class ClienteService {
 		return clienteRepository.save(this.updateData(clienteBd, cliente));
 	}
 	
+	public ClienteEntity updatePassword(Integer matricula, String novaSenha) {
+		ClienteEntity clienteBd = this.findByMatricula(matricula);
+		return clienteRepository.save(this.updatePassword(clienteBd, novaSenha));
+	}
+	
 	public void delete(ClienteEntity cliente) {
 		ClienteEntity clienteBd = this.findByMatricula(cliente.getMatricula());
 		clienteRepository.delete(clienteBd);
@@ -57,5 +62,12 @@ public class ClienteService {
 		clienteBd.setSenha(cliente.getSenha());
 		return clienteBd;
 	}
+	
+	private ClienteEntity updatePassword(ClienteEntity clienteBd, String novaSenha) {
+		clienteBd.setSenha(bcrypt.encode(novaSenha));
+		return clienteBd;
+	}
+	
+	
 	
 }

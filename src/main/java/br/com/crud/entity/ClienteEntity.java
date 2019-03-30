@@ -12,7 +12,6 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 /**
  * @author Rafael Castro
  * @version 1.0
@@ -31,6 +30,7 @@ public class ClienteEntity {
 	@Email(message = "Informe um email valido")
 	@Column(unique=true)
 	private String email;
+	@Size(max = 100, min = 8, message = "Informe uma senha com a quantidade de caracteres entre 8 e 100")
 	@Column(unique=true)
 	private String senha;
 	
@@ -44,6 +44,7 @@ public class ClienteEntity {
 	}
 
 	public ClienteEntity() {
+		
 	}
 
 	public Integer getMatricula() {
@@ -77,7 +78,7 @@ public class ClienteEntity {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
+
 	public String getSenha() {
 		return senha;
 	}
@@ -85,4 +86,7 @@ public class ClienteEntity {
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
+	
+	
+	
 }

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import br.com.crud.entity.ClienteEntity;
+import br.com.crud.entity.dto.NewPasswordDto;
 import br.com.crud.service.ClienteService;
 
 @RestController
@@ -53,7 +54,11 @@ public class ClienteResource {
 		return ResponseEntity.noContent().build();
 	}
 	
-	
-	
+	@RequestMapping(value = "/forgot", method = RequestMethod.POST)
+	public ResponseEntity<Void> forgotPassword(@RequestBody NewPasswordDto newPassword){
+		clienteService.updatePassword(newPassword.getMatricula(), newPassword.getSenha());
+		
+		return ResponseEntity.ok().build();
+	}
 	
 }
