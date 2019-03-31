@@ -1,6 +1,7 @@
 package br.com.crud.config;
 
 import java.util.Arrays;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -28,6 +29,7 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private UserDetailsService userDetailsService;
+    
     
     /**
      * Liberação de paths para o swagger
@@ -66,10 +68,7 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter {
 	  CorsConfigurationSource corsConfigurationSource() {
 		CorsConfiguration configuration = new CorsConfiguration().applyPermitDefaultValues(); 
 		configuration.setAllowedMethods(Arrays.asList("POST","GET","PUT","DELETE","OPTIONS", "PATCH"));
-		configuration.addExposedHeader("Access-Control-Allow-Origin, Access-Control-Allow-Credentials");
-		configuration.addAllowedHeader("Content-Type , X-Requested-With , Origin ,Access-Control-Request-Method," +
-                " Access-Control-Request-Headers");
-		configuration.addAllowedOrigin("http://localhost:4200/**");
+		configuration.setAllowedOrigins(Arrays.asList("http://localhost:4200")); 
 	    final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
 	    source.registerCorsConfiguration("/**",configuration);
 	    return source;
