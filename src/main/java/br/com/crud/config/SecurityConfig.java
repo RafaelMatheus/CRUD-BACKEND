@@ -1,5 +1,8 @@
 package br.com.crud.config;
 
+import java.util.Arrays;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -10,7 +13,16 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
+/**
+ * 
+ * @author Rafael Castro
+ * Classe com as configurações de liberações de PATHS, para uso do spring security
+ *@version 1.0
+ */
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig  extends WebSecurityConfigurerAdapter {
@@ -18,6 +30,11 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter {
     @Autowired
     private UserDetailsService userDetailsService;
     
+    
+    /**
+     * Liberação de paths para o swagger
+     * @see br.com.crud.config.SwaggerConfig.informacoesApi()
+     */
     private static final String[] PUBLIC_MATCHERS_SWAGGER = {
 			"/swagger-ui.html/**",
 			"/swagger-resource/**",
@@ -27,6 +44,7 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter {
 			"/webjars/**",
 			"/swagger-resources/**"
 	};
+    
     private static final String[] PUBLIC_MATCHERS = {
     		"/h2-console/**"
     };
@@ -38,13 +56,23 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.csrf().disable();
+    	http.cors().and().csrf().disable();
         http.authorizeRequests()
                 .antMatchers(PUBLIC_MATCHERS_SWAGGER).permitAll()
                 .antMatchers(HttpMethod.POST,PUBLIC_MATCHERS_POST).permitAll()
                 .antMatchers(PUBLIC_MATCHERS).permitAll()
                 .anyRequest().authenticated();
     }
+    
+    @Bean
+	  CorsConfigurationSource corsConfigurationSource() {
+		CorsConfiguration configuration = new CorsConfiguration().applyPermitDefaultValues(); 
+		configuration.setAllowedMethods(Arrays.asList("POST","GET","PUT","DELETE","OPTIONS", "PATCH"));
+		configuration.setAllowedOrigins(Arrays.asList("http://localhost:4200")); 
+	    final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+	    source.registerCorsConfiguration("/**",configuration);
+	    return source;
+	  }
 
     @Override
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
