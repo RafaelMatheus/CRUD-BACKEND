@@ -60,8 +60,8 @@ public class ClienteService {
 		return clienteRepository.save(this.updatePassword(clienteBd, novaSenha));
 	}
 	
-	public void delete(ClienteEntity cliente) {
-		ClienteEntity clienteBd = this.findByMatricula(cliente.getMatricula());
+	public void delete(Integer matricula) {
+		ClienteEntity clienteBd = this.findByMatricula(matricula);
 		clienteRepository.delete(clienteBd);
 	}
 	
