@@ -1,5 +1,6 @@
 package br.com.crud.service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -44,6 +45,7 @@ public class ClienteService {
 	
 	public ClienteEntity insert(ClienteEntity cliente) { 
 		cliente.setMatricula(null);
+		cliente.setDataCadast(new Date());
 		cliente.setSenha(bcrypt.encode(cliente.getSenha()));
 		return clienteRepository.save(cliente);
 	}
