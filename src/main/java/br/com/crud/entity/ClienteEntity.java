@@ -24,7 +24,7 @@ public class ClienteEntity {
 	@NotEmpty(message = "O campo nome é requerido")
 	@Size(max = 100, min = 3, message = "Informe um nome com a quantidade de caracteres entre 3 e 100")
 	private String nome;
-	@JsonFormat(pattern = "dd-mm-yyyy")
+	@JsonFormat(pattern = "dd/mm/yyyy")
 	private Date dataNascimento;
 	@NotEmpty(message = "O campo data é requerido")
 	@Email(message = "Informe um email valido")
@@ -33,14 +33,16 @@ public class ClienteEntity {
 	@Size(max = 100, min = 8, message = "Informe uma senha com a quantidade de caracteres entre 8 e 100")
 	@Column(unique=true)
 	private String senha;
+	private Date dataCadast;
 	
 
-	public ClienteEntity(Integer matricula, String nome, Date dataNascimento, String email, String senha) {
+	public ClienteEntity(Integer matricula, String nome, Date dataNascimento, String email, String senha, Date dataCadast) {
 		this.matricula = matricula;
 		this.nome = nome;
 		this.dataNascimento = dataNascimento;
 		this.email = email;
 		this.senha = senha;
+		this.dataCadast = dataCadast;
 	}
 
 	public ClienteEntity() {
@@ -86,7 +88,14 @@ public class ClienteEntity {
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
-	
+
+	public Date getDataCadast() {
+		return dataCadast;
+	}
+
+	public void setDataCadast(Date dataCadast) {
+		this.dataCadast = dataCadast;
+	}
 	
 	
 }
