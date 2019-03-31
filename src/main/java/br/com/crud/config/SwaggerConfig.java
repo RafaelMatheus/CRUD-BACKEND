@@ -53,7 +53,7 @@ public class SwaggerConfig implements WebMvcConfigurer{
 		ApiInfoBuilder apiInfoBuilder = new ApiInfoBuilder();
  
 		
-		apiInfoBuilder.title("Api - CRUD cliente ");
+		apiInfoBuilder.title("Api - CRUD clientes ");
 		apiInfoBuilder.description("Backend para realização de crud de clientes");
 		apiInfoBuilder.version("1.0");
 		apiInfoBuilder.termsOfServiceUrl("Termo de uso: Deve ser usada para estudos.");
