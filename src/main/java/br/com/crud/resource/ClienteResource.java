@@ -57,9 +57,8 @@ public class ClienteResource {
 	}
 	
 	@RequestMapping(value = "/{matricula}", method = RequestMethod.DELETE)
-	public ResponseEntity<Void> delte(@RequestBody ClienteEntity cliente, @PathVariable(name = "matricula") Integer matricula){
-		cliente.setMatricula(matricula);
-		clienteService.delete(cliente);
+	public ResponseEntity<Void> delte( @PathVariable(name = "matricula") Integer matricula){
+		clienteService.delete(matricula);
 		return ResponseEntity.noContent().build();
 	}
 	
