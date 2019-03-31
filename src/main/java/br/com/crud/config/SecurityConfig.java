@@ -17,6 +17,8 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
+import crud.crud.security.FilterOrigin;
+
 /**
  * 
  * @author Rafael Castro
@@ -62,15 +64,13 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.POST,PUBLIC_MATCHERS_POST).permitAll()
                 .antMatchers(PUBLIC_MATCHERS).permitAll()
                 .anyRequest().authenticated();
+        	http.addFilter(new FilterOrigin(authenticationManager()));
     }
     
     @Bean
 	  CorsConfigurationSource corsConfigurationSource() {
 		CorsConfiguration configuration = new CorsConfiguration().applyPermitDefaultValues(); 
 		configuration.setAllowedMethods(Arrays.asList("POST","GET","PUT","DELETE","OPTIONS", "PATCH"));
-		configuration.setAllowedOrigins (Arrays.asList("http://localhost:4200")); 
-		configuration.setAllowedHeaders(Arrays.asList("http://localhost:4200"));
-		configuration.setAllowCredentials(true);
 	    final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
 	    source.registerCorsConfiguration("/**",configuration);
 	    return source;
