@@ -94,6 +94,28 @@ public class ClienteResource {
 	}
 	
 
+	@ApiOperation(
+			value="Retorna um cliente por nome indicado, pode ser o nome inicial ou algum nome do meio", 
+			response=ClienteEntity.class,
+			notes="Essa operação não é necessário nenhuma premissa.",
+			produces="application/json")
+	@ApiResponses(value= {
+			@ApiResponse(
+					code=200, 
+					message="Retorna uma lista paginada de clientes, com o status code ok"
+					),
+			@ApiResponse(
+					code=401,
+					message="Indica que você não possui as credencias de autenticação válida. "
+
+					),
+			@ApiResponse(
+					code=404,
+					message="Indica que o recurso que você está procurando não existe, ou não foi encontrado."
+
+					)
+ 
+	})
 	@RequestMapping(value = "/search",method = RequestMethod.GET)
 	public ResponseEntity<Page<ClienteDto>> search(
 			@RequestParam(value = "nome", defaultValue = "") String nome,
