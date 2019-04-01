@@ -30,8 +30,8 @@ public class ClienteEntity {
 	@Email(message = "Informe um email valido")
 	@Column(unique=true)
 	private String email;
+	@NotEmpty(message = "O campo senha é requerido")
 	@Size(max = 100, min = 8, message = "Informe uma senha com a quantidade de caracteres entre 8 e 100")
-	@Column(unique=true)
 	private String senha;
 	private Date dataCadast;
 	
