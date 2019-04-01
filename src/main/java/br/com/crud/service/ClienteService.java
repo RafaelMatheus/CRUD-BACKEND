@@ -43,8 +43,9 @@ public class ClienteService {
 	}
 	
 	public Page<ClienteEntity> searchCliente(Integer page, Integer linesPerPage, String orderBy, String direction, String nome) {
+		System.out.println(nome);
 		PageRequest pageRequest = new PageRequest(page, linesPerPage, Direction.valueOf(direction), orderBy);
-		return clienteRepository.findClienteEntityByNomeOrEmail(nome, pageRequest);
+		return clienteRepository.findByNomeLike(nome, pageRequest);
 	}
 	
 	public ClienteEntity insert(ClienteEntity cliente) { 
