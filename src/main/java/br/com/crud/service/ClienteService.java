@@ -42,6 +42,11 @@ public class ClienteService {
 		return clienteRepository.findAll(pageRequest);
 	}
 	
+	public Page<ClienteEntity> searchCliente(Integer page, Integer linesPerPage, String orderBy, String direction, String nome) {
+		PageRequest pageRequest = new PageRequest(page, linesPerPage, Direction.valueOf(direction), orderBy);
+		return clienteRepository.findClienteEntityByNomeOrEmail(nome, pageRequest);
+	}
+	
 	public ClienteEntity insert(ClienteEntity cliente) { 
 		cliente.setMatricula(null);
 		cliente.setSenha(bcrypt.encode(cliente.getSenha()));

@@ -41,6 +41,19 @@ public class ClienteResource {
 		return ResponseEntity.ok().body(listDto);
 	}
 	
+	@RequestMapping(value = "/search",method = RequestMethod.GET)
+	public ResponseEntity<Page<ClienteDto>> search(
+			@RequestParam(value = "nome", defaultValue = "") String nome,
+			@RequestParam(value = "page", defaultValue = "0") Integer page,
+			@RequestParam(value = "linesPerPage", defaultValue = "24") Integer linesPerPage,
+			@RequestParam(value = "orderBy", defaultValue = "matricula") String orderBy,
+			@RequestParam(value = "direction", defaultValue = "ASC") String direction) {
+		
+		Page<ClienteEntity> list = clienteService.searchCliente(page, linesPerPage, orderBy, direction, nome);
+		Page<ClienteDto> listDto = list.map(obj -> new ClienteDto(obj));
+		return ResponseEntity.ok().body(listDto);
+	}
+	
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<Void> insert(@RequestBody ClienteEntity cliente){
 		ClienteEntity newCliente = clienteService.insert(cliente);
