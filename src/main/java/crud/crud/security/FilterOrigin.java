@@ -29,7 +29,9 @@ public class FilterOrigin extends BasicAuthenticationFilter  {
 	                                    FilterChain chain) throws IOException, ServletException {
 
 	        String origin = request.getHeader("Origin");
+
 	        response.setHeader("Access-Control-Allow-Origin", allowedOrigins.contains(origin) ? origin : "");
+	        response.setHeader("Access-Control-Allow-Origin", "http://localhost:4200" );
 	        response.setHeader("Access-Control-Allow-Credentials", "true");
 	        chain.doFilter(request, response);
 	    }
