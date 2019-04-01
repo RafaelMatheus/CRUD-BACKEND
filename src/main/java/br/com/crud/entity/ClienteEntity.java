@@ -19,7 +19,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 @Entity(name = "cliente")
 public class ClienteEntity {
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private Integer matricula;
 	@NotEmpty(message = "O campo nome é requerido")
 	@Size(max = 100, min = 3, message = "Informe um nome com a quantidade de caracteres entre 3 e 100")
