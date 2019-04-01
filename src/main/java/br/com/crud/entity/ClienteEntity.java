@@ -24,7 +24,7 @@ public class ClienteEntity {
 	@NotEmpty(message = "O campo nome é requerido")
 	@Size(max = 100, min = 3, message = "Informe um nome com a quantidade de caracteres entre 3 e 100")
 	private String nome;
-	@JsonFormat(pattern = "dd/mm/yyyy")
+	@JsonFormat(pattern = "yyyy-mm-dd")
 	private Date dataNascimento;
 	@NotEmpty(message = "O campo data é requerido")
 	@Email(message = "Informe um email valido")

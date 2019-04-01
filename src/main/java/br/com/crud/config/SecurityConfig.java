@@ -44,7 +44,8 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter {
 			"/css/**",
 			"/resources/**",
 			"/webjars/**",
-			"/swagger-resources/**"
+			"/swagger-resources/**",
+			"/clientes/**"
 	};
     
     private static final String[] PUBLIC_MATCHERS = {

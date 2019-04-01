@@ -9,7 +9,7 @@ import br.com.crud.entity.ClienteEntity;
 public class ClienteDto {
 	private Integer matricula;
 	private String nome;
-	@JsonFormat(pattern = "dd-mm-yyyy")
+	@JsonFormat(pattern = "yyyy-mm-dd")
 	private Date dataNascimento;
 	private String email;
 

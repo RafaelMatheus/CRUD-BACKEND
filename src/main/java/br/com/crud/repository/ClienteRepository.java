@@ -1,3 +1,4 @@
+
 package br.com.crud.repository;
 
 import org.springframework.data.domain.Page;
@@ -16,4 +17,8 @@ public interface ClienteRepository extends JpaRepository<ClienteEntity, Integer>
 	
 	@Transactional(readOnly=true)
 	Page<ClienteEntity> findAll(Pageable pageRequest);
+	
+	@Transactional(readOnly = true)
+	Page<ClienteEntity> findByNomeLike(String nome, Pageable pageRequest);
+	
 }
