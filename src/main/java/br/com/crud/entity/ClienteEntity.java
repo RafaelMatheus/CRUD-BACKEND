@@ -27,11 +27,11 @@ public class ClienteEntity {
 	@JsonFormat(pattern = "yyyy-mm-dd")
 	private Date dataNascimento;
 	@NotEmpty(message = "O campo data é requerido")
-	@Email(message = "Informe um email valido")
+	@Email
 	@Column(unique=true)
 	private String email;
 	@NotEmpty(message = "O campo senha é requerido")
-	@Size(max = 100, min = 8, message = "Informe uma senha com a quantidade de caracteres entre 8 e 100")
+	@Size(max=100, min=6, message="senha deve ter entre 6 e 50 caracteres")
 	private String senha;
 	private Date dataCadast;
 	

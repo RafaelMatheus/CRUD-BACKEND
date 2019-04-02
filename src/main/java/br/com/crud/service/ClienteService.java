@@ -75,7 +75,6 @@ public class ClienteService {
 		clienteBd.setNome(cliente.getNome());
 		clienteBd.setEmail(cliente.getEmail());
 		clienteBd.setDataNascimento(cliente.getDataNascimento());
-		clienteBd.setSenha(cliente.getSenha());
 		return clienteBd;
 	}
 	
