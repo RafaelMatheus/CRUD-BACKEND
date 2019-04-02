@@ -240,9 +240,9 @@ public class ClienteResource {
 					)
  
 	})
-	@RequestMapping(value = "/forgot", method = RequestMethod.POST)
+	@RequestMapping(value = "/password", method = RequestMethod.PATCH)
 	public ResponseEntity<Void> forgotPassword(@RequestBody NewPasswordDto newPassword){
-		clienteService.updatePassword(newPassword.getMatricula(), newPassword.getSenha());
+		clienteService.updatePassword(newPassword);
 		return ResponseEntity.noContent().build();
 	}
 	

@@ -12,8 +12,10 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import br.com.crud.entity.ClienteEntity;
+import br.com.crud.entity.dto.NewPasswordDto;
 import br.com.crud.repository.ClienteRepository;
 import br.com.crud.service.exception.ObjectNotFoundException;
+import br.com.crud.service.exception.PasswordException;
 
 
 
@@ -61,9 +63,12 @@ public class ClienteService {
 		return clienteRepository.save(this.updateData(clienteBd, cliente));
 	}
 	
-	public ClienteEntity updatePassword(Integer matricula, String novaSenha) {
-		ClienteEntity clienteBd = this.findByMatricula(matricula);
-		return clienteRepository.save(this.updatePassword(clienteBd, novaSenha));
+	public ClienteEntity updatePassword(NewPasswordDto newPassword) {
+		ClienteEntity clienteBd = this.findByMatricula(newPassword.getMatricula());
+		if(this.isEqualsPassword(clienteBd.getSenha(), newPassword.getNovaSenha()))
+			throw new PasswordException("Nova senha não pode ser igual a anterior.");
+		
+		return clienteRepository.save(this.updatePassword(clienteBd, newPassword.getNovaSenha()));
 	}
 	
 	public void delete(Integer matricula) {
@@ -83,6 +88,10 @@ public class ClienteService {
 		return clienteBd;
 	}
 	
+	private boolean isEqualsPassword(String senhaAtual, String novaSenha) {
+		if(senhaAtual.equalsIgnoreCase(bcrypt.encode(novaSenha))) return true;
+		return false;
+	}
 	
 	
 }

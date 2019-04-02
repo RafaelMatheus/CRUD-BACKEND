@@ -3,12 +3,14 @@ package br.com.crud.entity.dto;
 public class NewPasswordDto {
 
 	private Integer matricula;
-	private String senha;
+	private String senhaAtual;
+	private String novaSenha;
 
-	public NewPasswordDto(Integer matricula, String senha) {
+	public NewPasswordDto(Integer matricula, String senhaAtual, String novaSenha) {
 		super();
 		this.matricula = matricula;
-		this.senha = senha;
+		this.senhaAtual = senhaAtual;
+		this.novaSenha = novaSenha;
 	}
 
 	public NewPasswordDto() {
@@ -23,12 +25,20 @@ public class NewPasswordDto {
 		this.matricula = matricula;
 	}
 
-	public String getSenha() {
-		return senha;
+	public String getSenhaAtual() {
+		return senhaAtual;
 	}
 
-	public void setSenha(String senha) {
-		this.senha = senha;
+	public void setSenhaAtual(String senhaAtual) {
+		this.senhaAtual = senhaAtual;
+	}
+
+	public String getNovaSenha() {
+		return novaSenha;
+	}
+
+	public void setNovaSenha(String novaSenha) {
+		this.novaSenha = novaSenha;
 	}
 
 }
