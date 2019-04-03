@@ -2,13 +2,11 @@
 
 ### API RESTFUL
 
-</br>
 * Este projeto é uma API que implementa </br>
 * as bos práticas de arquitetura REST.</br>
 * O front end foi escrito em angular e está localizado neste repositório: https://github.com/RafaelMatheus/CRUD-FRONTEND.git </br>
-* [Breakdance](http://idebescola.inep.gov.br/ideb/consulta-publica) </br>
 * A api foi escrita em java utiliando do spring e está localizada neste endereço: https://clienteback.herokuapp.com/swagger-ui.html </br>
-</br>
+
 
 
 #### Tecnologias:
