@@ -5,7 +5,8 @@
 </br>
 > Este projeto é uma API que implementa </br>
 > as bos práticas de arquitetura REST.</br>
-> O front end foi escrito em angular e está localizado neste [repositório] (https://github.com/RafaelMatheus/CRUD-FRONTEND.git)
+> O front end foi escrito em angular e está localizado neste repositório: https://github.com/RafaelMatheus/CRUD-FRONTEND.git </br>
+> A api foi escrita em java utiliando do spring e está localizada neste endereço: https://clienteback.herokuapp.com/swagger-ui.html </br>
 </br>
 
 
@@ -27,7 +28,6 @@ $ Spring Security
 
 ### Endpoints REST:
 * /clientes
-* /clientes/forgot
 * /clientes/search
 
 
