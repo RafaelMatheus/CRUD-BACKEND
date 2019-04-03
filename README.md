@@ -5,7 +5,7 @@
 </br>
 > Este projeto é uma API que implementa </br>
 > as bos práticas de arquitetura REST.</br>
-> O front end foi escrito em angular e está localizado neste [repositório](https://github.com/RafaelMatheus/CRUD-FRONTEND.git)
+> O front end foi escrito em angular e está localizado neste [repositório] (https://github.com/RafaelMatheus/CRUD-FRONTEND.git)
 </br>
 
 
