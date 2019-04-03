@@ -16,6 +16,7 @@ import br.com.crud.entity.dto.NewPasswordDto;
 import br.com.crud.repository.ClienteRepository;
 import br.com.crud.service.exception.ObjectNotFoundException;
 import br.com.crud.service.exception.PasswordException;
+import br.com.crud.service.exception.ValidationError;
 
 
 
@@ -52,6 +53,7 @@ public class ClienteService {
 	}
 	
 	public ClienteEntity insert(ClienteEntity cliente) { 
+		if(clienteRepository.findByEmail(cliente.getEmail()) != null ) throw new ValidationError("Email já existe no cadasstro");
 		cliente.setMatricula(null);
 		cliente.setDataCadast(new Date());
 		cliente.setSenha(bcrypt.encode(cliente.getSenha()));
