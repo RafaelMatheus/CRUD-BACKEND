@@ -65,10 +65,10 @@ public class ClienteService {
 	
 	public ClienteEntity updatePassword(NewPasswordDto newPassword) {
 		ClienteEntity clienteBd = this.findByMatricula(newPassword.getMatricula());
-		if(this.isEqualsPassword(clienteBd.getSenha(), newPassword.getNovaSenha()))
+		if(this.isEqualsPassword(clienteBd.getSenha(), newPassword.getSenhaNova()))
 			throw new PasswordException("Nova senha não pode ser igual a anterior.");
 		
-		return clienteRepository.save(this.updatePassword(clienteBd, newPassword.getNovaSenha()));
+		return clienteRepository.save(this.updatePassword(clienteBd, newPassword.getSenhaNova()));
 	}
 	
 	public void delete(Integer matricula) {

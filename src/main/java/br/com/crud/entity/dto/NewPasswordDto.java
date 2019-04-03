@@ -4,13 +4,15 @@ public class NewPasswordDto {
 
 	private Integer matricula;
 	private String senhaAtual;
-	private String novaSenha;
+	private String senhaNova;
+	private String confirmsenha;
 
-	public NewPasswordDto(Integer matricula, String senhaAtual, String novaSenha) {
+	public NewPasswordDto(Integer matricula, String senhaAtual, String senhaNova, String confirmsenha) {
 		super();
 		this.matricula = matricula;
 		this.senhaAtual = senhaAtual;
-		this.novaSenha = novaSenha;
+		this.senhaNova = senhaNova;
+		this.confirmsenha = confirmsenha;
 	}
 
 	public NewPasswordDto() {
@@ -33,12 +35,20 @@ public class NewPasswordDto {
 		this.senhaAtual = senhaAtual;
 	}
 
-	public String getNovaSenha() {
-		return novaSenha;
+	public String getSenhaNova() {
+		return senhaNova;
 	}
 
-	public void setNovaSenha(String novaSenha) {
-		this.novaSenha = novaSenha;
+	public void setSenhaNova(String senhaNova) {
+		this.senhaNova = senhaNova;
+	}
+
+	public String getConfirmsenha() {
+		return confirmsenha;
+	}
+
+	public void setConfirmsenha(String confirmsenha) {
+		this.confirmsenha = confirmsenha;
 	}
 
 }
