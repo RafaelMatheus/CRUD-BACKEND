@@ -28,7 +28,7 @@ public class ClienteEntity {
 	private Date dataNascimento;
 	@NotEmpty(message = "O campo data é requerido")
 	@Email
-	@Column(unique=true)
+	@Column(unique=true, nullable = false)
 	private String email;
 	@NotEmpty(message = "O campo senha é requerido")
 	@Size(max=100, min=6, message="senha deve ter entre 6 e 50 caracteres")
