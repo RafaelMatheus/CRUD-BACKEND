@@ -16,7 +16,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class FilterOrigin extends BasicAuthenticationFilter  {
 
-	private final List<String> allowedOrigins = Arrays.asList("http://localhost:4200");
+	private final List<String> allowedOrigins = Arrays.asList("http://localhost:4200", "https://crudcliente.herokuapp.com");
 
 	public FilterOrigin(AuthenticationManager authenticationManager) {
 		super(authenticationManager);
